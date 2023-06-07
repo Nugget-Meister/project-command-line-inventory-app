@@ -1,0 +1,14 @@
+{
+  "name": "project-command-line-inventory-app",
+  "version": "1.0.0",
+  "description": "command line inventory project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Nugget-Meister",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^29.5.0"
+  }
+}
