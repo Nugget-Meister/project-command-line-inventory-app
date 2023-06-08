@@ -4,7 +4,11 @@
   "description": "Pursuit 10.2 Command Line Inventory App",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "create": "node index.js create",
+    "delete": "node index.js delete",
+    "update": "node index.js create",
+    "showList": "node index.js showList",
   },
   "author": "Nugget-Meister",
   "license": "ISC",

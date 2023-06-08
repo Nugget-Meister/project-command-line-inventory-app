@@ -17,17 +17,17 @@ function run(command) {
             break;
         case "delete":
             break;
+        case "update":
+            break;
         case "showList":
             break;
         case "showDetails":
             break;
-        case "update":
+        case "addCart":
             break;
-        case "addItem":
+        case "removeCart":
             break;
-        case "removeItem":
-            break;
-        case "clear":
+        case "clearCart":
             break;
     } 
 }
