@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Apple",
+        "priceInCents": 1.39,
+        "inStock": true,
+        "remaining": 10,
+        "color": "Red"
+    },
+    {
+        "name": "Gatorade",
+        "priceInCents": 275,
+        "inStock": true,
+        "remaining": 6,
+        "flavor": "Berry Blast"
+    },
+    {
+        "name": "Lubriderm",
+        "priceInCents": 100,
+        "inStock": false,
+        "remaining": 0,
+        "size": "15.6 oz"
+    }
+    {
+        "name": "Sketchers Sneakers",
+        "priceInCents": 100,
+        "inStock": true,
+        "remaining": 1,
+        "size": "12M"
+    }
+]

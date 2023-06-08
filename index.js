@@ -7,13 +7,27 @@ function createItem () {}
 function deleteItem () {}
 function updateItem () {}
 function itemDetails () {}
-function listItems() {}
+function listItems () {}
 
 
 
-// function run(command) {
-//     switch (command){
-//         case "create":
-//         case " "
-//     } 
-// }
+function run(command) {
+    switch (command){
+        case "create":
+            break;
+        case "delete":
+            break;
+        case "showList":
+            break;
+        case "showDetails":
+            break;
+        case "update":
+            break;
+        case "addItem":
+            break;
+        case "removeItem":
+            break;
+        case "clear":
+            break;
+    } 
+}

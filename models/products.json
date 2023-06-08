@@ -1,0 +1,9 @@
+[
+    {
+        "name": "sample",
+        "priceInCents": 100,
+        "inStock": true,
+        "remaining": 1,
+        "@uniquePropertyName": "value"
+    }
+]
