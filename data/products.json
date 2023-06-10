@@ -1,30 +1,34 @@
 [
     {
-        "name": "Apple",
+        "name": "Jordans Retro 1",
         "priceInCents": 1.39,
         "inStock": true,
         "remaining": 10,
-        "color": "Red"
+        "size": "8",
+        "gender": "F"
     },
     {
-        "name": "Gatorade",
-        "priceInCents": 275,
+        "name": "New Balance Roav V2",
+        "priceInCents": 3999,
         "inStock": true,
         "remaining": 6,
-        "flavor": "Berry Blast"
+        "size": "10.5",
+        "gender": "M"
     },
     {
-        "name": "Lubriderm",
-        "priceInCents": 100,
+        "name": "HOKA Clifton 8",
+        "priceInCents": 11200,
         "inStock": false,
         "remaining": 0,
-        "size": "15.6 oz"
+        "size": "10",
+        "gender": "F"
     },
     {
-        "name": "Sketchers Sneakers",
-        "priceInCents": 100,
+        "name": "Adidas Ultraboost",
+        "priceInCents": 14999,
         "inStock": true,
         "remaining": 1,
-        "size": "12M"
+        "size": "12",
+        "gender": "M"
     }
 ]
