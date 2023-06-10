@@ -8,6 +8,9 @@ const {
     write
 } = require(`./helpers/readWrite.js`)
 
+const sampleProduct = require(`./models/products.json`)
+const sampleCart = require(`./models/cart.json`)
+
 const chalk = require(`chalk`)
 
 function nameMatch(name, products){
@@ -17,15 +20,20 @@ function nameMatch(name, products){
     searchResult = products.indexOf(name)
 }
 
-function validateEntries(toValidate,example){
+function validateEntries(toValidate, example){
+    let badValue = []
     for(key of Object.keys(example)){
-        if(!toValidate[example]){
-            console.log(toValidate)
-            console.log(`missing ${key} from object`)
-            return false
+        console.log(key,toValidate[key])
+        if(!toValidate[key]){
+            badValue.push(key)
         }
     }
-    return true
+    if(badValue.length > 0) {
+        console.log(`Missing ${chalk.blue(...badValue)} from object`)
+        return false
+    } else {
+        return true
+    }
 }
 
 function createItem (data, object) {
@@ -39,21 +47,16 @@ function createItem (data, object) {
     } else {
         newItem = object
     }
-
-    
-    // let newItem = {
-        //     name : object.name,
-        //     priceInCents: object.price || 0,
-        //     remaining: object.amount || 0,
-        //     inStock: object.amount > 0 ? true : false,
-        // }
+    //Validate created object
+    if(!validateEntries(newItem,sampleProduct)) {
+        console.log(`Invalid object entered`)
+    } else {
+        data.push(newItem)
+    }
         
-        // source.push(newItem)
-        
-    data.push(newItem)
-        
-    return data
+    // return data
 }
+
 function deleteItem () {}
 function updateItem () {}
 function itemDetails () {}
