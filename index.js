@@ -36,15 +36,24 @@ function validateEntries(toValidate, example){
     }
 }
 
+/**
+ * Processes input from command line and returns a formed object.
+ * Takes no direct inputs.
+ * @returns {Object} - Object with key value pairs from commandline.
+ */
+function cmdToObject() {
+    return Object.fromEntries(process.argv.slice(3).map(input => {
+        return input.split('=')
+    }))
+}
+
+
 
 function createItem (data, object) {
     let newItem = {}
 
     if(!object){
-        object = process.argv.slice(3).map(input => {
-            return input.split('=')
-        })
-        newItem = Object.fromEntries(object)
+        newItem = cmdToObject()
     } else {
         newItem = object
     }
@@ -67,6 +76,8 @@ function createItem (data, object) {
 
     return data
 }
+
+
 
 function deleteItem () {}
 function updateItem () {}
