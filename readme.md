@@ -78,7 +78,7 @@ Output
 
 ## updateItem <*item key/value pairs*>
 
-Will check if there is an item with that id included in the database. Allows for editing multiple keys and can be put in any order. Must be in the following format with ~**no spaces**~. 
+Will check if there is an item with that id included in the database. Allows for editing multiple keys and can be put in any order. Must be in the following format with **no spaces**. 
 
 ```js
 key=value
