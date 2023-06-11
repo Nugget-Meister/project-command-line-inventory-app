@@ -13,11 +13,11 @@ const sampleCart = require(`./models/cart.json`)
 
 const chalk = require(`chalk`)
 
-function nameMatch(name, products){
-    filteredArr = products.map(product => {
-        return product.name
+function nameMatch(data, name){
+    filteredArr = data.map(item => {
+        return item.name
     })
-    searchResult = products.indexOf(name)
+    return filteredArr.indexOf(name)
 }
 
 function validateEntries(toValidate, example){
@@ -78,8 +78,21 @@ function createItem (data, object) {
 }
 
 
+/**
+ * Deletes item from selected array with that name
+ * @param {*} data - Source array to remove item from
+ * @param {*} name - name of item to delete
+ */
+function deleteItem (data, name) {
+    let indexMatch = null
+    if(name){
+        indexMatch = nameMatch(data,name)
+    } else {
+        indexMatch = nameMatch(data,process.argv[3])
+    }
+    console.log(indexMatch,process.argv[3])
 
-function deleteItem () {}
+}
 function updateItem () {}
 function itemDetails () {}
 function listItems () {}
@@ -88,14 +101,16 @@ function listItems () {}
 
 function run(command) {
     let source = read("./data","products.json")
-
+    let overWrite = null
     switch (command){
         case "create":
-            let overWrite = createItem(source)
+            overWrite = createItem(source);
             console.log(overWrite)
             // write(overWrite,"./data","products.json");
             break;
-        case "delete":
+        case "delete": 
+            overWrite = deleteItem(source)
+            console.log(overWrite)
             break;
         case "update":
             break;
