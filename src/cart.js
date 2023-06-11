@@ -12,7 +12,7 @@ function addToCart(data,cart,id) {
         return cart
     }
 
-    if(item.remaining < 1){
+    if(item.remaining < cart[itemInCart].amount){
         console.log(chalk.red(`None of ${item.name} left in stock. Item not added to cart.`))
         return cart
     }
@@ -24,6 +24,7 @@ function addToCart(data,cart,id) {
                 id: item.id,
                 name: item.name,
                 size: item.size,
+                price: item.priceInCents,
                 amount: 1,
             })
         }
@@ -35,7 +36,14 @@ function removefromCart(cart, id){
     id = id ? id : process.argv[3]
     let itemMatch = idMatch(cart,id)
     if(itemMatch != -1) {
-        console.log(chalk.bgRed(`Removed ${chalk.bgRed()}`))
+        console.log(chalk.red(`Removed 1 ${chalk.yellow(cart[itemMatch].name)} from cart`))
+       
+        if (cart[itemMatch].amount <= 1){
+            cart = cart.toSpliced(itemMatch,1)
+        } else{
+            cart[itemMatch].amount -= 1;
+        }
+
     } else {
         console.log(chalk.red(`Item with ID ${chalk.yellow(id)} not found. No changes have been made.`))
     }
@@ -56,8 +64,22 @@ function clearCart(cart){
     return []
 }
 
+function viewCart(cart){
+    return cart.map(item => {
+        return {  
+                id: item.id,
+                name: item.name,
+                size: item.size,
+                price: item.price/100,
+                amount: 1,  
+        }
+    })
+}
+
+
 module.exports = {
     addToCart,
     removefromCart,
+    viewCart,
     clearCart
 }

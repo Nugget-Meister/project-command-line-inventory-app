@@ -162,7 +162,11 @@ function run(command) {
         case "removeCart":
             overWrite = removefromCart(savedCart)
             console.log(overWrite)
-            // write(overWrite,"./data","cart.json")
+            write(overWrite,"./data","cart.json")
+            break;
+        case "viewCart":
+            overWrite = viewCart(savedCart)
+            console.log(overWrite)
             break;
         case "clearCart":
             overWrite = clearCart(savedCart)
