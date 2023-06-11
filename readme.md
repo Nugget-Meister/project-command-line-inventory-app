@@ -4,6 +4,8 @@
 
 Will check if the information provided has all of the required entries. Keys that are not in the required entries will be automatically thrown out by the application. Includes data validation and formatting.
 
+data can be put in any order but should be 
+
 An id will be assigned when the item is generated.
 
 ## DeleteItem()

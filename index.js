@@ -24,15 +24,8 @@ const sampleCart = require(`./models/cart.json`)
 
 
 function createItem (data, object) {
-    let newItem = {}
+    let newItem = !object ? cmdToObject() : object
 
-    if(!object){
-        newItem = cmdToObject()
-    } else {
-        newItem = object
-    }
-
-    
     //Validate and format created object
     if(!validateEntries(newItem,sampleProduct)) {
         console.log(`${chalk.bgRed(`Invalid object entered. Data not added`)}`)
@@ -48,7 +41,6 @@ function createItem (data, object) {
         console.log(chalk.green(`Added ${chalk.yellow(newItem.name)} to database.`))
         data.push(newItem)
     }
-
     return data
 }
 
@@ -69,13 +61,26 @@ function deleteItem (data, id) {
 }
 
 function updateItem (data, object) {
+    let updatedItem = !object ? cmdToObject() : object
+    let indexMatch = idMatch(data,updatedItem.id)
+    
+    console.log(indexMatch)
 
-    // let indexMatch = id ? idMatch(data,id) : idMatch(data,process.argv[3])
+
+    if(indexMatch != -1) {
+        data[indexMatch] = {
+            name: updatedItem.name || data[updatedItem].name,
+            priceInCents: updatedItem.priceInCents || data[updatedItem].priceInCents,
+            remaining: updatedItem.remaining || data[updatedItem].remaining
+        }
+    }
+    
+
+    return data
 }
 function itemDetails () {}
 function listItems () {}
 
-console.log(nanoid(3))
 
 function run(command) {
     let source = read("./data","products.json")
@@ -92,6 +97,9 @@ function run(command) {
             // write(overWrite,"./data","products.json")
             break;
         case "update":
+            overWrite = updateItem(source)
+            console.log(overWrite)
+            // write(overWrite,"./data","products.json")
             break;
         case "showAll":
             break;
@@ -104,7 +112,7 @@ function run(command) {
         case "clearCart":
             break;
         default:
-            console.log()
+            console.log("command not recognized", command)
             break;
     } 
 }

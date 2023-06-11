@@ -1,3 +1,5 @@
+const chalk = require(`chalk`)
+
 function idMatch(data, id){
     filteredArr = data.map(item => {
         return item.id
@@ -8,9 +10,14 @@ function idMatch(data, id){
 function validateEntries(toValidate, example){
     let badValue = []
     for(key of Object.keys(example)){
-        // console.log(key,toValidate[key])
         if(!toValidate[key]){
             badValue.push(key)
+        }
+        if(typeof example[key] == "number") { // NaN Validation
+            if(Number(toValidate[key]) !== Number(toValidate[key])){
+                console.log(chalk.red(`NaN detected for ${chalk.yellow(key)}. Please check input and try again.`))
+                badValue.push(key)
+            }
         }
     }
     if(badValue.length > 0) {
