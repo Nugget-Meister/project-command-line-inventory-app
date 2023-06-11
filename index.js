@@ -53,14 +53,20 @@ function createItem (data, object) {
  * @param {*} data - Source array to remove item from
  * @param {*} id - id of item to delete
  */
-function deleteItem (data, id) {    
-    let indexMatch = id ? idMatch(data,id) : idMatch(data,process.argv[3])
+function deleteItem (data, id) {   
+    id = id ? id : process.argv[3]
+    let indexMatch = idMatch(data,id)
 
     if(indexMatch != -1) {
         console.log(chalk.bgRed(`Deleted ${chalk.yellow(data[indexMatch].name)} from database.`))
         return data.toSpliced(indexMatch,1)
+    } else {
+        console.log(chalk.red(`No item found with ID of ${chalk.yellow(id)}`))
     }
+
+    return data
 }
+
 
 function updateItem (data, object) {
     let updatedItem = !object ? cmdToObject() : object
@@ -111,7 +117,7 @@ function itemDetails (data, id) {
     }
 
     return `name:       ${chalk.green(item.name)}
-price:      ${item.priceInCents}
+price:      ${item.priceInCents/100}
 remaining:  ${chalk.yellow(item.remaining)} 
 size:       ${chalk.blue(item.size)}
 gender:     ${chalk.bgGray(item.gender)}`    
@@ -120,9 +126,11 @@ gender:     ${chalk.bgGray(item.gender)}`
 function listItems (data) {
     return filteredArr = data.map(item => {
         return {
+            id: item.id,
             name: item.name,
             remaining: item.remaining,
-            priceInCents: item.priceInCents
+            priceInCents: item.priceInCents,
+
         }
     })
 }
@@ -136,17 +144,17 @@ function run(command) {
         case "create":
             overWrite = createItem(source);
             console.log(overWrite)
-            // write(overWrite,"./data","products.json");
+            write(overWrite,"./data","products.json");
             break;
         case "delete": 
             overWrite = deleteItem(source)
             console.log(overWrite)
-            // write(overWrite,"./data","products.json")
+            write(overWrite,"./data","products.json")
             break;
         case "update":
-            overWrite = updateItem()
+            overWrite = updateItem(source)
             console.log(overWrite)
-            // write(overWrite,"./data","products.json")
+            write(overWrite,"./data","products.json")
             break;
         case "showDetails":
             console.log(itemDetails(source))
@@ -171,8 +179,11 @@ function run(command) {
         case "clearCart":
             overWrite = clearCart(savedCart)
             console.log(overWrite)
-            // write(overWrite,"./data","cart.json")
+            write(overWrite,"./data","cart.json")
             break;
+        case "restoreProducts":
+            overWrite = read("./data","_products.json")
+            write(overWrite,"./data","products.json")
         default:
             break;
     } 

@@ -1,6 +1,1 @@
-[
-    {"id":"ex1","name":"Jordans Retro 1","priceInCents":13999,"remaining":10,"size":8,"gender":"F"},
-    {"id":"ex2","name":"New Balance Roav V2","priceInCents":3999,"remaining":6,"size":10.5,"gender":"M"},
-    {"id":"ex3","name":"HOKA Clifton 8","priceInCents":11200,"remaining":0,"size":10,"gender":"F"},
-    {"id":"ex4","name":"Adidas Ultraboost","priceInCents":14999,"remaining":1,"size":12,"gender":"M"}
- ]
+[{"id":"ex1","name":"Jordans Retro 1","priceInCents":13999,"remaining":10,"size":8,"gender":"F"},{"id":"ex2","name":"New Balance Roav V2","priceInCents":3999,"remaining":6,"size":10.5,"gender":"M"},{"id":"ex3","name":"HOKA Clifton 8","priceInCents":11200,"remaining":0,"size":10,"gender":"F"},{"id":"ex4","name":"Adidas Ultraboost","priceInCents":14999,"remaining":1,"size":12,"gender":"M"}]
