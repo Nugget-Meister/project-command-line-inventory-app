@@ -1,3 +1,4 @@
+//Helper importin
 const {
     addToCart,
     removefromCart
@@ -8,45 +9,18 @@ const {
     write
 } = require(`./helpers/readWrite.js`)
 
-const sampleProduct = require(`./models/products.json`)
-const sampleCart = require(`./models/cart.json`)
+const {
+  idMatch,
+  validateEntries,
+  cmdToObject  
+} = require(`./helpers/formatValidate.js`)
 
+// Package Importing
+const {nanoid} = require('nanoid')
 const chalk = require(`chalk`)
 
-function nameMatch(data, name){
-    filteredArr = data.map(item => {
-        return item.name
-    })
-    return filteredArr.indexOf(name)
-}
-
-function validateEntries(toValidate, example){
-    let badValue = []
-    for(key of Object.keys(example)){
-        // console.log(key,toValidate[key])
-        if(!toValidate[key]){
-            badValue.push(key)
-        }
-    }
-    if(badValue.length > 0) {
-        console.log(`Missing ${chalk.blue(...badValue)} from object`)
-        return false
-    } else {
-        return true
-    }
-}
-
-/**
- * Processes input from command line and returns a formed object.
- * Takes no direct inputs.
- * @returns {Object} - Object with key value pairs from commandline.
- */
-function cmdToObject() {
-    return Object.fromEntries(process.argv.slice(3).map(input => {
-        return input.split('=')
-    }))
-}
-
+const sampleProduct = require(`./models/products.json`)
+const sampleCart = require(`./models/cart.json`)
 
 
 function createItem (data, object) {
@@ -64,6 +38,7 @@ function createItem (data, object) {
         console.log(`${chalk.bgRed(`Invalid object entered. Data not added`)}`)
     } else {
         newItem = {
+            id: nanoid(3),
             name: String(newItem.name),
             priceInCents: Number(newItem.priceInCents),
             remaining: Number(newItem.remaining),
@@ -81,23 +56,26 @@ function createItem (data, object) {
 /**
  * Deletes item from selected array with that name
  * @param {*} data - Source array to remove item from
- * @param {*} name - name of item to delete
+ * @param {*} id - id of item to delete
  */
-function deleteItem (data, name) {
-    let indexMatch = null
-    if(name){
-        indexMatch = nameMatch(data,name)
-    } else {
-        indexMatch = nameMatch(data,process.argv[3])
-    }
-    console.log(indexMatch,process.argv[3])
+function deleteItem (data, id) {
 
+    let indexMatch = id ? idMatch(data,id) : idMatch(data,process.argv[3])
+
+    if(indexMatch != -1) {
+        console.log(chalk.bgRed(`Deleted ${chalk.yellow(data[indexMatch].name)} from database.`))
+        return data.toSpliced(indexMatch,1)
+    }
 }
-function updateItem () {}
+
+function updateItem (data, object) {
+
+    // let indexMatch = id ? idMatch(data,id) : idMatch(data,process.argv[3])
+}
 function itemDetails () {}
 function listItems () {}
 
-
+console.log(nanoid(3))
 
 function run(command) {
     let source = read("./data","products.json")
@@ -111,6 +89,7 @@ function run(command) {
         case "delete": 
             overWrite = deleteItem(source)
             console.log(overWrite)
+            // write(overWrite,"./data","products.json")
             break;
         case "update":
             break;
