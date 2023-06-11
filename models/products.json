@@ -1,7 +1,6 @@
 {
     "name": "sample",
-    "priceInCents": 100,
-    "inStock": true,
+    "priceInCents": 100,    
     "remaining": 1,
     "size": "value",
     "gender": "F"

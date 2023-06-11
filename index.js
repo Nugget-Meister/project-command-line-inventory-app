@@ -23,7 +23,7 @@ function nameMatch(name, products){
 function validateEntries(toValidate, example){
     let badValue = []
     for(key of Object.keys(example)){
-        console.log(key,toValidate[key])
+        // console.log(key,toValidate[key])
         if(!toValidate[key]){
             badValue.push(key)
         }
@@ -36,6 +36,7 @@ function validateEntries(toValidate, example){
     }
 }
 
+
 function createItem (data, object) {
     let newItem = {}
 
@@ -47,14 +48,24 @@ function createItem (data, object) {
     } else {
         newItem = object
     }
-    //Validate created object
+
+    
+    //Validate and format created object
     if(!validateEntries(newItem,sampleProduct)) {
-        console.log(`Invalid object entered`)
+        console.log(`${chalk.bgRed(`Invalid object entered. Data not added`)}`)
     } else {
+        newItem = {
+            name: String(newItem.name),
+            priceInCents: Number(newItem.priceInCents),
+            remaining: Number(newItem.remaining),
+            size: Number(newItem.size),
+            gender: String(newItem.gender)
+        }
+        console.log(chalk.green(`Added ${chalk.yellow(newItem.name)} to database.`))
         data.push(newItem)
     }
-        
-    // return data
+
+    return data
 }
 
 function deleteItem () {}

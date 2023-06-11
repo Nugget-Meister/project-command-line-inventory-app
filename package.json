@@ -10,7 +10,9 @@
     "update": "node index.js update",
     "showDetails": "node index.js showDetails",
     "showAll": "node index.js showAll",
-    "addCart": "node index.js addCart"
+    "addCart": "node index.js addCart",
+    "removeCart": "node index.js removeCart",
+    "clearCart": "node index.js clearCart"
   },
   "author": "Nugget-Meister",
   "license": "ISC",

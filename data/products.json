@@ -2,33 +2,29 @@
     {
         "name": "Jordans Retro 1",
         "priceInCents": 1.39,
-        "inStock": true,
         "remaining": 10,
-        "size": "8",
+        "size": 8,
         "gender": "F"
     },
     {
         "name": "New Balance Roav V2",
         "priceInCents": 3999,
-        "inStock": true,
         "remaining": 6,
-        "size": "10.5",
+        "size": 10.5,
         "gender": "M"
     },
     {
         "name": "HOKA Clifton 8",
         "priceInCents": 11200,
-        "inStock": false,
         "remaining": 0,
-        "size": "10",
+        "size": 10,
         "gender": "F"
     },
     {
         "name": "Adidas Ultraboost",
         "priceInCents": 14999,
-        "inStock": true,
         "remaining": 1,
-        "size": "12",
+        "size": 12,
         "gender": "M"
     }
 ]
