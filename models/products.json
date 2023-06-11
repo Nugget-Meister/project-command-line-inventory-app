@@ -2,6 +2,6 @@
     "name": "sample",
     "priceInCents": 100,    
     "remaining": 1,
-    "size": "value",
+    "size": 1,
     "gender": "F"
 }

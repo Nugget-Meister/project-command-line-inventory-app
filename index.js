@@ -12,7 +12,8 @@ const {
 const {
   idMatch,
   validateEntries,
-  cmdToObject  
+  cmdToObject,
+  checkNaN
 } = require(`./helpers/formatValidate.js`)
 
 // Package Importing
@@ -50,8 +51,7 @@ function createItem (data, object) {
  * @param {*} data - Source array to remove item from
  * @param {*} id - id of item to delete
  */
-function deleteItem (data, id) {
-
+function deleteItem (data, id) {    
     let indexMatch = id ? idMatch(data,id) : idMatch(data,process.argv[3])
 
     if(indexMatch != -1) {
@@ -62,22 +62,42 @@ function deleteItem (data, id) {
 
 function updateItem (data, object) {
     let updatedItem = !object ? cmdToObject() : object
-    let indexMatch = idMatch(data,updatedItem.id)
-    
-    console.log(indexMatch)
+    let indexMatch = null
 
-
-    if(indexMatch != -1) {
-        data[indexMatch] = {
-            name: updatedItem.name || data[updatedItem].name,
-            priceInCents: updatedItem.priceInCents || data[updatedItem].priceInCents,
-            remaining: updatedItem.remaining || data[updatedItem].remaining
-        }
+    if (updatedItem.id) {
+        indexMatch = idMatch(data,updatedItem.id)
+    } else {
+        console.log(chalk.red(`ID not specified. Please specify ID and try again. Data not modified.`))
+        return data
     }
-    
+    // console.log(indexMatch)
+    if(indexMatch != -1) {
+        updatedItem = {
+            id : updatedItem.id,
+            name: updatedItem.name || data[indexMatch].name,
+            priceInCents: checkNaN(updatedItem.priceInCents) || data[indexMatch].priceInCents,
+            remaining: checkNaN(updatedItem.remaining) || data[indexMatch].remaining,
+            size: checkNaN(updatedItem.size) || data[indexMatch].size,
+            gender: updatedItem.gender || data[indexMatch].gender,
+        }
 
-    return data
+        console.log(updatedItem)
+
+        if (!validateEntries(updatedItem, sampleProduct)){
+            console.log(chalk.bgRed(`Invalid object entered. Data unchanged.`))
+            // return data
+        } 
+        else {
+            console.log(`Updated ${chalk.yellow(updatedItem.name)} at ${chalk.yellow(updatedItem.id)}`)
+            data[indexMatch] = updatedItem
+        }
+    } else {
+        console.log(chalk.red(`Item with id ${chalk.yellow(updatedItem.id)} not found. Data unchanged.`))
+    }
+
+    // return data
 }
+
 function itemDetails () {}
 function listItems () {}
 
