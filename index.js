@@ -126,7 +126,7 @@ price:      ${item.priceInCents/100}
 remaining:  ${chalk.yellow(item.remaining)} 
 size:       ${chalk.blue(item.size)}
 gender:     ${chalk.bgGray(item.gender)}`    
-}
+    }
 }
 function listItems (data) {
     return filteredArr = data.map(item => {
