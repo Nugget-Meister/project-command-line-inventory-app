@@ -1,7 +1,8 @@
 //Helper importin
 const {
     addToCart,
-    removefromCart
+    removefromCart,
+    clearCart
 } = require("./src/cart.js")
 
 const {
@@ -62,14 +63,6 @@ function deleteItem (data, id) {
 }
 
 function updateItem (data, object) {
-    // try {
-    //     console.log(Object.keys(data))
-    //  }
-    // catch{
-    //      console.log(`${chalk.bgRed(`ERROR:`)} No dataset input.`)
-    //      return null
-    //  }
-
     let updatedItem = !object ? cmdToObject() : object
     let indexMatch = null
 
@@ -164,14 +157,19 @@ function run(command) {
         case "addCart":
             overWrite = addToCart(source, savedCart)
             console.log(overWrite)
-            // write(overWrite,"./data","cart.json")
+            write(overWrite,"./data","cart.json")
             break;
         case "removeCart":
+            overWrite = removefromCart(savedCart)
+            console.log(overWrite)
+            // write(overWrite,"./data","cart.json")
             break;
         case "clearCart":
+            overWrite = clearCart(savedCart)
+            console.log(overWrite)
+            // write(overWrite,"./data","cart.json")
             break;
         default:
-            console.log("command not recognized", command)
             break;
     } 
 }

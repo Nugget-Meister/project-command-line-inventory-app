@@ -7,7 +7,10 @@ function addToCart(data,cart,id) {
     let item = data[idMatch(data,id)]
     let itemInCart = idMatch(cart,id)
 
-    // console.log(id,itemInCart)
+    if(!item){
+        console.log(chalk.red(`Item with id ${id} not found. Cart not modified.`))
+        return cart
+    }
 
     if(item.remaining < 1){
         console.log(chalk.red(`None of ${item.name} left in stock. Item not added to cart.`))
@@ -39,7 +42,22 @@ function removefromCart(cart, id){
     return cart
 }
 
+function clearCart(cart){
+    total = 0
+    cart.forEach(item => {
+        total += item.amount
+    })
+    if(total > 0) {
+        console.log(chalk.red(`Removed ${chalk.yellow(total)} items from cart.`))
+    } else {
+        console.log(chalk.yellow(`Nothing in the cart to remove`))
+    }
+   
+    return []
+}
+
 module.exports = {
     addToCart,
-    removefromCart
+    removefromCart,
+    clearCart
 }

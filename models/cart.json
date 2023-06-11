@@ -1,7 +1,6 @@
-[
-    {
-        "name": "name",
-        "priceInCents": 100,
-        "quantity": 1
-    }
-]
+
+{
+    "name": "name",
+    "priceInCents": 100,
+    "quantity": 1
+}
