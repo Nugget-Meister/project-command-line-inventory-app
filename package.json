@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "createItem": "node index.js create",
-    "deleteItem": "node index.js delete",
+    "removeItem": "node index.js remove",
     "updateItem": "node index.js update",
     "showDetails": "node index.js showDetails",
     "showAll": "node index.js showAll",

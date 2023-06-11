@@ -37,7 +37,7 @@ Data can be put in any order but must be formatted as such and separated by a si
 
 Example:
 ```
-node index.js create name=nugget priceInCents=100 remaining=1 size=10 gender=M
+npm run createItem name=nugget priceInCents=100 remaining=1 size=10 gender=M
 ```
 
 Output:
