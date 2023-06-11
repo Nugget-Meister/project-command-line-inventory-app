@@ -10,7 +10,7 @@ Nanoid@3
 This program has the following commands that can be run, required additional inputs are *<encapsulated>*
     
 - createItem <*item key/value pairs*>
-- deleteItem <*id*>
+- removeItem <*id*>
 - updateItem <*id*> <*...key/value pairs*>
 - showDetails <*id*>
 - showAll
@@ -20,7 +20,7 @@ This program has the following commands that can be run, required additional inp
 - clearCart
 - restoreDefault
 
-## CreateItem <*item key/value pairs*>
+## createItem <*item key/value pairs*>
 
 Will check if the information provided has all of the required entries. Keys that are not in the required entries will be automatically thrown out by the application. Includes data validation and formatting.
 
@@ -65,16 +65,45 @@ Added nugget to database.
 An id will be assigned when the item is generated.
 
 
-## deleteItem <*id*>
+## removeItem <*id*>
 
 Will check if there is an item with that id included in the database, and delete it if found. If nothing is found with that id then no edits will be made to the file. 
 
 Example:
 ```
-npm run deleteItem ex1
+npm run removeItem ex1
 ```
 
-Output
+Output:
+```js
+Deleted Jordans Retro 1 from database.
+[
+  {
+    id: 'ex2',
+    name: 'New Balance Roav V2',
+    priceInCents: 3999,
+    remaining: 6,
+    size: 10.5,
+    gender: 'M'
+  },
+  {
+    id: 'ex3',
+    name: 'HOKA Clifton 8',
+    priceInCents: 11200,
+    remaining: 0,
+    size: 10,
+    gender: 'F'
+  },
+  {
+    id: 'ex4',
+    name: 'Adidas Ultraboost',
+    priceInCents: 14999,
+    remaining: 1,
+    size: 12,
+    gender: 'M'
+  },
+]
+```
 
 ## updateItem <*item key/value pairs*>
 
