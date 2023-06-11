@@ -22,6 +22,7 @@ const chalk = require(`chalk`)
 
 const sampleProduct = require(`./models/products.json`)
 const sampleCart = require(`./models/cart.json`)
+const { isNullLiteral } = require("@babel/types")
 
 
 function createItem (data, object) {
@@ -61,6 +62,14 @@ function deleteItem (data, id) {
 }
 
 function updateItem (data, object) {
+    // try {
+    //     console.log(Object.keys(data))
+    //  }
+    // catch{
+    //      console.log(`${chalk.bgRed(`ERROR:`)} No dataset input.`)
+    //      return null
+    //  }
+
     let updatedItem = !object ? cmdToObject() : object
     let indexMatch = null
 
@@ -70,7 +79,7 @@ function updateItem (data, object) {
         console.log(chalk.red(`ID not specified. Please specify ID and try again. Data not modified.`))
         return data
     }
-    // console.log(indexMatch)
+
     if(indexMatch != -1) {
         updatedItem = {
             id : updatedItem.id,
@@ -94,11 +103,27 @@ function updateItem (data, object) {
     } else {
         console.log(chalk.red(`Item with id ${chalk.yellow(updatedItem.id)} not found. Data unchanged.`))
     }
-
-    // return data
+    return data
 }
 
-function itemDetails () {}
+function itemDetails (data, id) {
+    process.argv[3] ? id = process.argv[3] : null
+    let item = null
+    try {
+       item = data[idMatch(data,id)]
+    }
+    catch{
+        console.log(`${chalk.bgRed(`ERROR:`)} No dataset input.`)
+        return null
+    }
+
+    return `name:       ${chalk.green(item.name)}
+price:      ${item.priceInCents}
+remaining:  ${chalk.yellow(item.remaining)} 
+size:       ${chalk.blue(item.size)}
+gender:     ${chalk.bgGray(item.gender)}`    
+
+}
 function listItems () {}
 
 
@@ -117,13 +142,14 @@ function run(command) {
             // write(overWrite,"./data","products.json")
             break;
         case "update":
-            overWrite = updateItem(source)
+            overWrite = updateItem()
             console.log(overWrite)
             // write(overWrite,"./data","products.json")
             break;
-        case "showAll":
-            break;
         case "showDetails":
+            console.log(itemDetails(source))
+            break;
+        case "showAll":
             break;
         case "addCart":
             break;
