@@ -22,7 +22,7 @@ const chalk = require(`chalk`)
 
 const sampleProduct = require(`./models/products.json`)
 const sampleCart = require(`./models/cart.json`)
-const { isNullLiteral } = require("@babel/types")
+
 
 
 function createItem (data, object) {
@@ -124,11 +124,20 @@ size:       ${chalk.blue(item.size)}
 gender:     ${chalk.bgGray(item.gender)}`    
 
 }
-function listItems () {}
+function listItems (data) {
+    return filteredArr = data.map(item => {
+        return {
+            name: item.name,
+            remaining: item.remaining,
+            priceInCents: item.priceInCents
+        }
+    })
+}
 
 
 function run(command) {
     let source = read("./data","products.json")
+    let savedCart = read(`./data`,`cart.json`)
     let overWrite = null
     switch (command){
         case "create":
@@ -150,8 +159,12 @@ function run(command) {
             console.log(itemDetails(source))
             break;
         case "showAll":
+            console.log(listItems(source))
             break;
         case "addCart":
+            overWrite = addToCart(source, savedCart)
+            console.log(overWrite)
+            // write(overWrite,"./data","cart.json")
             break;
         case "removeCart":
             break;
