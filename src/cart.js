@@ -3,18 +3,30 @@ const {idMatch} = require(`../helpers/formatValidate.js`)
 
 function addToCart(data,cart,id) {
     id = id ? id : process.argv[3]
+    let itemMatch = idMatch(data,id)
+    let item = null
+    let itemInCart = null;
+    
 
-    let item = data[idMatch(data,id)]
-    let itemInCart = idMatch(cart,id)
-
-    if(!item){
+    if(itemMatch == -1){
         console.log(chalk.red(`Item with id ${id} not found. Cart not modified.`))
         return cart
+    } else {
+        item = data[itemMatch]
+        itemInCart = idMatch(cart,id)
     }
 
-    if(item.remaining < cart[itemInCart].amount){
-        console.log(chalk.red(`None of ${item.name} left in stock. Item not added to cart.`))
-        return cart
+
+    try {
+        if(item.remaining < cart[itemInCart].amount){
+            console.log(chalk.red(`None of ${item.name} left in stock. Item not added to cart.`))
+            return cart
+        }
+    } catch {
+        if(item.remaining < 1){
+            console.log(chalk.red(`None of ${item.name} left in stock. Item not added to cart.`))
+            return cart
+        }
     }
 
     if(itemInCart != -1 ){
@@ -65,13 +77,15 @@ function clearCart(cart){
 }
 
 function viewCart(cart){
+    let total = cart.reduce((total, add) => ((add.price * add.amount)/100) + total, 0)
+    console.log(chalk.green(`Your total price is ${chalk.blue(`$${total.toFixed(2)}`)}`))
     return cart.map(item => {
         return {  
                 id: item.id,
                 name: item.name,
                 size: item.size,
                 price: item.price/100,
-                amount: 1,  
+                amount: item.amount,  
         }
     })
 }

@@ -1,5 +1,26 @@
 # Command-Line Inventory Application project
 
+Hello there, this program requires the following dpendencies
+
+```javascript
+Chalk@4
+Nanoid@3
+```
+
+This program has the following commands that can be run
+```json
+    createItem
+    deleteItem
+    updateItem
+    showDetails
+    showAll
+    addCart
+    "removeCart
+    "viewCart": "node index.js viewCart",
+    "clearCart": "node index.js clearCart",
+    "restoreProducts": "node index.js restoreProducts"
+```
+
 ## CreateItem()
 
 Will check if the information provided has all of the required entries. Keys that are not in the required entries will be automatically thrown out by the application. Includes data validation and formatting.

@@ -2,7 +2,8 @@
 const {
     addToCart,
     removefromCart,
-    clearCart
+    clearCart,
+    viewCart
 } = require("./src/cart.js")
 
 const {
@@ -116,12 +117,16 @@ function itemDetails (data, id) {
         return null
     }
 
+    if(!item){
+        console.log(chalk.red(`No item with ID ${chalk.yellow(id)} found.`))
+        return null
+    } else {
     return `name:       ${chalk.green(item.name)}
 price:      ${item.priceInCents/100}
 remaining:  ${chalk.yellow(item.remaining)} 
 size:       ${chalk.blue(item.size)}
 gender:     ${chalk.bgGray(item.gender)}`    
-
+}
 }
 function listItems (data) {
     return filteredArr = data.map(item => {
@@ -181,9 +186,11 @@ function run(command) {
             console.log(overWrite)
             write(overWrite,"./data","cart.json")
             break;
-        case "restoreProducts":
+        case "restoreDefault":
             overWrite = read("./data","_products.json")
             write(overWrite,"./data","products.json")
+            write([],"./data","cart.json") 
+            console.log(chalk.red(`Restored defaults of all data files.`))
         default:
             break;
     } 
