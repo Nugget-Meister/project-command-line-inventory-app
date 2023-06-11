@@ -93,6 +93,19 @@ Example:
 npm run updateItem id=ex1 name="Lemon Squeezy"
 ```
 
+Output:
+```
+{
+  id: 'ex1',
+  name: 'Lemon Squeezy',
+  priceInCents: 13999,
+  remaining: 10,
+  size: 8,
+  gender: 'F'
+}
+Updated Lemon Squeezy at ex1
+```
+
 Multi word strings must be encapsulated in strings. This will reject inputs with datatypes that do not match.
 
 ## showDetails <*id*>
